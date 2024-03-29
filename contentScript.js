@@ -58,8 +58,8 @@ function hideCommentRepliesCount() {
 }
 
 function hideViews() {
-    const viewsSpan = document.querySelector('yt-formatted-string#info > span:first-child');
-    if (viewsSpan && viewsSpan.textContent.includes('views')) {
+    const viewsSpan = document.getElementById('info-container');
+    if (viewsSpan) {
         viewsSpan.style.display = 'none';
     }
 }
@@ -192,11 +192,14 @@ function hideLikeButtonAmount() {
     const root = document.getElementById('top-level-buttons-computed');
     if (root) {
         const childElement = root.querySelector('.yt-spec-button-shape-next__button-text-content');
-        childElement.remove();
+
+        if (childElement) {
+            childElement.remove();
+        }
     }
 }
 
-const observer = new MutationObserver(mutations => {
+function hideEverything() {
     // Hide the view count spans in all videos, below their thumbnails.
     hideViewCount();
 
@@ -238,6 +241,15 @@ const observer = new MutationObserver(mutations => {
         // Hide the 'Latest comments' section in the Studio dashboard.
         hideStudioLatestComments();
     }
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    hideEverything();
+});
+
+const observer = new MutationObserver(mutations => {
+    hideEverything();
 
     if (isStudio()) {
         mutations.forEach(mutation => {
