@@ -8,8 +8,8 @@ style.textContent = `
 document.head.appendChild(style);
 
 function hideViewCount() {
-    const firstViewCountSpans = document.querySelectorAll('#metadata-line > .inline-metadata-item');
-    firstViewCountSpans.forEach(span => {
+    const firstViewCounts = document.querySelectorAll('#metadata-line > .inline-metadata-item');
+    firstViewCounts.forEach(span => {
         if (span.textContent.includes('views')) {
             span.style.display = 'none';
             const nextSpan = span.nextElementSibling;
@@ -19,8 +19,8 @@ function hideViewCount() {
         }
     });
 
-    const secondViewCountSpawns = document.querySelectorAll('#metadata-line > .ytd-grid-video-renderer');
-    secondViewCountSpawns.forEach(span => {
+    const secondViewCounts = document.querySelectorAll('#metadata-line > .ytd-grid-video-renderer');
+    secondViewCounts.forEach(span => {
         if (span.textContent.includes('views')) {
             span.style.display = 'none';
             const nextSpan = span.nextElementSibling;
@@ -58,27 +58,29 @@ function hideCommentRepliesCount() {
 }
 
 function hideViews() {
-    const viewsSpan = document.getElementById('info-container');
-    if (viewsSpan) {
-        viewsSpan.style.display = 'none';
+    const views = document.getElementById('info-container');
+    if (views) {
+        views.style.display = 'none';
     }
 }
 
 function hideSubscribers() {
-    const subscriberSpans = document.querySelectorAll('yt-formatted-string#owner-sub-count');
-    subscriberSpans.forEach(span => {
+    const subscribers = document.querySelectorAll('yt-formatted-string#owner-sub-count');
+    subscribers.forEach(span => {
         span.style.display = 'none';
     });
 }
 
 function hideCommentLikeAmounts() {
-    document.querySelectorAll('span[id="vote-count-middle"]').forEach(voteCount => {
-        voteCount.textContent = 'Like';
+    const voteCountMiddles = document.querySelectorAll('span[id="vote-count-middle"]');
+    voteCountMiddles.forEach(voteCountMiddle => {
+        voteCountMiddle.textContent = 'Like';
     });
 }
 
 function hideShortsLikeAmount(shortsInnerContainer) {
-    shortsInnerContainer.querySelectorAll('ytd-toggle-button-renderer[id="like-button"]').forEach(likeButton => {
+    const likeButtons = shortsInnerContainer.querySelectorAll('ytd-toggle-button-renderer[id="like-button"]');
+    likeButtons.forEach(likeButton => {
         let likeButtonLabel = likeButton.querySelector('.yt-spec-button-shape-with-label__label');
 
         if (likeButtonLabel) {
@@ -88,7 +90,8 @@ function hideShortsLikeAmount(shortsInnerContainer) {
 }
 
 function hideShortsCommentAmount(shortsInnerContainer) {
-    shortsInnerContainer.querySelectorAll('div[id="comments-button"]').forEach(commentButton => {
+    const commentsButtons = shortsInnerContainer.querySelectorAll('div[id="comments-button"]');
+    commentsButtons.forEach(commentButton => {
         let commentButtonLabel = commentButton.querySelector('.yt-spec-button-shape-with-label__label');
 
         if (commentButtonLabel) {
@@ -98,7 +101,8 @@ function hideShortsCommentAmount(shortsInnerContainer) {
 }
 
 function hideShortsCommentsAmountInSidePanel(shortsInnerContainer) {
-    shortsInnerContainer.querySelectorAll('yt-formatted-string[id="contextual-info"]').forEach(commentsLabel => {
+    const commentLabels = shortsInnerContainer.querySelectorAll('yt-formatted-string[id="contextual-info"]');
+    commentLabels.forEach(commentsLabel => {
         commentsLabel.textContent = ' ';
     });
 }
@@ -107,6 +111,7 @@ function hideStudioSeeCommentsAmount() {
     const viewCommentsButton = document.getElementById('view-comments-button');
     if (viewCommentsButton) {
         const viewCommentsButtonLabel = viewCommentsButton.querySelector('div');
+
         if (viewCommentsButtonLabel) {
             viewCommentsButtonLabel.textContent = 'See Comments';
         }
@@ -160,8 +165,8 @@ function hideSubscribersTrend(node) {
 }
 
 function roundCurrentSubscribersAmount(node) {
-    const metricValueElements = node.querySelectorAll(".metric-value-big.style-scope.ytcd-channel-facts-item");
-    metricValueElements.forEach(metricValue => {
+    const metricValues = node.querySelectorAll(".metric-value-big.style-scope.ytcd-channel-facts-item");
+    metricValues.forEach(metricValue => {
         const subscribersTitle = metricValue.parentElement.querySelector(".subscribers-title.style-scope.ytcd-channel-facts-item");
         if (subscribersTitle && subscribersTitle.textContent.includes("Current subscribers")) {
             const subscriberCount = Math.round(parseInt(metricValue.textContent.replace(/,/g, '')) / 100000) * 100000;
@@ -177,8 +182,9 @@ function hideSubscribersTrendOfChildren(node) {
 }
 
 function hideTopVideosViews(node) {
-    node.querySelectorAll('a.table-cell.remove-default-style.style-scope.ytcd-channel-facts-item[tabindex="-1"]').forEach(targetElement => {
-        targetElement.text = "⠀⠀⠀⠀";
+    const topVideoViewLabels = node.querySelectorAll('a.table-cell.remove-default-style.style-scope.ytcd-channel-facts-item[tabindex="-1"]');
+    topVideoViewLabels.forEach(topVideoViewLabel => {
+        topVideoViewLabel.text = "⠀⠀⠀⠀";
     });
 }
 
@@ -189,12 +195,12 @@ function hideLatestPostStatistics(node) {
 }
 
 function hideLikeButtonAmount() {
-    const root = document.getElementById('top-level-buttons-computed');
-    if (root) {
-        const childElement = root.querySelector('.yt-spec-button-shape-next__button-text-content');
+    const likeButtonRoot = document.getElementById('top-level-buttons-computed');
+    if (likeButtonRoot) {
+        const likeButton = likeButtonRoot.querySelector('.yt-spec-button-shape-next__button-text-content');
 
-        if (childElement) {
-            childElement.remove();
+        if (likeButton) {
+            likeButton.remove();
         }
     }
 }
@@ -245,6 +251,7 @@ function hideEverything() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Hide everything on page load.
     hideEverything();
 });
 
@@ -303,4 +310,24 @@ observer.observe(document.body, {
     subtree: true,
     attributes: true,
     attributeOldValue: true,
+});
+
+function toggleCommentsVisibility(hideComments) {
+    const comments = document.querySelectorAll('ytd-comments[id="comments"]');
+    comments.forEach(comment => {
+        comment.style.display = hideComments ? 'none' : 'block';
+    });
+}
+
+// When the content script loads, check the stored preference and apply it
+chrome.storage.sync.get('hideComments', function(data) {
+    if (data.hideComments !== undefined) {
+        toggleCommentsVisibility(data.hideComments); // Apply the stored preference
+    }
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.hideComments !== undefined) {
+        toggleCommentsVisibility(request.hideComments); // This function toggles visibility based on message
+    }
 });
