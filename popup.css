@@ -1,0 +1,77 @@
+body {
+    font-family: Calibri, sans-serif;
+    color: #909090;
+    width: 240px;
+    padding: 6px;
+    background-color: #1F1F1F;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+label {
+    font-family: Calibri, sans-serif;
+    font-size: medium;
+}
+h2 {
+    font-family: Calibri, sans-serif;
+    font-weight: bold;
+    font-size: x-large;
+    color: #A0A0A0;
+    margin-bottom: 10px; /* Added margin below the title */
+}
+hr {
+    margin-bottom: 10px; /* Added margin below the horizontal line */
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Added some margin-bottom for spacing */
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px; /* Adjusted width of the switch */
+    height: 24px; /* Adjusted height of the switch */
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #282828;
+    transition: .1s;
+    border-radius: 12px; /* Added border-radius for rounded corners */
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; /* Adjusted height of the slider */
+    width: 18px; /* Adjusted width of the slider */
+    left: 3px; /* Adjusted positioning for centering */
+    bottom: 3px; /* Adjusted positioning for centering */
+    background-color: white;
+    transition: .1s;
+    border-radius: 50%; /* Ensuring a circular shape */
+}
+input:checked + .slider {
+    background-color: #FF4E45;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #FF4E45;
+}
+input:checked + .slider:before {
+    transform: translateX(16px); /* Adjusted positioning for the checked state */
+}
+.slider.round {
+    border-radius: 24px; /* Adjusted border radius for a round slider */
+}
+.slider.round:before {
+    border-radius: 50%;
+}

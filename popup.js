@@ -1,19 +1,25 @@
-document.getElementById('toggleComments').addEventListener('change', function() {
-    let isChecked = this.checked;
-    // Save the state in chrome.storage
-    chrome.storage.sync.set({hideComments: isChecked}, function() {
-        console.log('Comments visibility preference is set to ' + isChecked);
-    });
+const toggleComments = document.getElementById('toggleComments');
 
-    // Send message to the content script
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {hideComments: isChecked});
-    });
-});
+if (toggleComments) {
+    toggleComments.addEventListener('change', function () {
+        let isChecked = this.checked;
 
-// On popup load, get the state from chrome.storage and update the checkbox
-document.addEventListener('DOMContentLoaded', function() {
-    chrome.storage.sync.get('hideComments', function(data) {
-        document.getElementById('toggleComments').checked = !!data.hideComments;
+        chrome.storage.sync.set({hideComments: isChecked});
+
+        chrome.tabs.query(
+            {active: true, currentWindow: true},
+            function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {hideComments: isChecked});
+            }
+        );
     });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    chrome.storage.sync.get(
+        'hideComments',
+        function (data) {
+            toggleComments.checked = !!data.hideComments;
+        }
+    );
 });

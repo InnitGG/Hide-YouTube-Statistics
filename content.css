@@ -1,39 +1,55 @@
-/* Hide the 'views' from the video thumbnail. */
+/* [Stream] Hide the 'watching now' from the video description's viewers. */
+#view-count {
+    display: none !important;
+}
+
+/* [Video] Hide the 'views' from the video thumbnail. */
 #metadata > #metadata-line > span:nth-child(3) {
     display: none !important;
 }
 
-/* Hide the 'separator' between the video thumbnail's views and upload date. */
+/* [Video] Hide the 'separator' between the video thumbnail's views and upload date. */
 #metadata > #metadata-line > span:nth-child(4)::before {
     display: none !important;
 }
 
-/* Hide the video description's views. */
+/* [Video] Hide the video description's views. */
 #info-container > #info > span:nth-child(1) {
     display: none !important;
 }
 
-/* Hide the 'separator' between the video description's views and upload date. */
+/* [Video] Hide the 'separator' between the video description's views and upload date. */
 #info-container > #info > span:nth-child(2) {
     display: none !important;
 }
 
-/* Hide the vote counts on all comments. */
+/* [Video] Hide the vote counts on all comments. */
 #vote-count-middle {
     display: none !important;
 }
 
-/* Hide the channel subscriber count atop the video description. */
+/* [Video] Hide the channel subscriber count atop the video description. */
 #owner-sub-count {
     display: none !important;
 }
 
-/* Hide the channel subscriber count below the video description. */
+/* [Video] Hide the channel subscriber count below the video description. */
 #header div#subtitle {
     display: none;
 }
 
+/* [Video] Hide the like amount in the like button above the video description. */
 like-button-view-model > toggle-button-view-model > button-view-model > button > .yt-spec-button-shape-next__button-text-content {
+    display: none !important;
+}
+
+/* [Shorts] Hide the description view count. */
+view-count-factoid-renderer {
+    display: none !important;
+}
+
+/* [Shorts] Hide the description like amount. */
+div#factoids > factoid-renderer:nth-child(1) {
     display: none !important;
 }
 
@@ -62,19 +78,60 @@ ytcd-card[test-id="channel-dashboard-recent-activity-card"] {
     display: none !important;
 }
 
-/*                 // [Studio] Remove the views metric in the 'Channel analytics' section.
-                if (node.matches('.metric-row')) {
-                    if (hasParentMatchingSelector(node, '#metrics-table', 1) && node.previousElementSibling === null) {
-                        node.style.display = 'none';
-                    }
-                } */
-
 /* [Studio] Hide the views metric in the 'Channel analytics' section. */
 #metrics-table .metric-row:first-child {
     display: none !important;
 }
 
-/* [Studio] Hide the analytics section below the 'Latest video performance'. */
+/* [Studio] Hide the analytics section below 'Latest video performance'. */
 #analytics-section {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Go to video analytics' button below 'Latest video performance'. */
+#go-to-video-analytics-button {
+    display: none !important;
+
+    width: 0;
+    height: 0;
+}
+
+/* [Channel] Hide the subscriber and video counts in the inner channel header of the main channel pages. */
+#contentContainer #subscriber-count, #contentContainer #videos-count {
+    display: none !important;
+}
+
+/* [Channel] Remove the space after the channel handle in the main channel pages. */
+#contentContainer #subscriber-count + *, #contentContainer #channel-handle + * {
+    display: none !important;
+}
+
+/* [Channel] Hide the 'views' from the video thumbnail. */
+#metadata > #metadata-line.ytd-grid-video-renderer > span:nth-child(1) {
+    display: none !important;
+}
+
+/* [Channel] Hide the 'separator' between the video thumbnail's views and upload date. */
+#metadata > #metadata-line.ytd-grid-video-renderer > span:nth-child(2)::before {
+    display: none !important;
+}
+
+/* [Shorts] Hide the like amount in the like button */
+ytd-toggle-button-renderer[id="like-button"] .yt-spec-button-shape-with-label__label {
+    display: none !important;
+}
+
+/* [Shorts] Hide the dislike amount in the like button */
+ytd-toggle-button-renderer[id="dislike-button"] .yt-spec-button-shape-with-label__label {
+    display: none !important;
+}
+
+/* [Shorts] Hide the comment amount */
+div[id="comments-button"] .yt-spec-button-shape-with-label__label {
+    display: none !important;
+}
+
+/* [Shorts] Hide the comments amount in side panel */
+yt-formatted-string[id="contextual-info"] {
     display: none !important;
 }

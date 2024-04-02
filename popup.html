@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Toggle Comments</title>
+    <title>Hide YouTube Statistics</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 <body>
-<div>
-    <input type="checkbox" id="toggleComments" name="toggleComments">
+<h2>Hide YouTube Statistics</h2>
+<hr>
+<div class="container">
     <label for="toggleComments">Hide Comments</label>
+    <label class="switch">
+        <input type="checkbox" id="toggleComments" name="toggleComments">
+        <span class="slider round"></span>
+    </label>
 </div>
 <script src="popup.js"></script>
 </body>
