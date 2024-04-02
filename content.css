@@ -1,0 +1,80 @@
+/* Hide the 'views' from the video thumbnail. */
+#metadata > #metadata-line > span:nth-child(3) {
+    display: none !important;
+}
+
+/* Hide the 'separator' between the video thumbnail's views and upload date. */
+#metadata > #metadata-line > span:nth-child(4)::before {
+    display: none !important;
+}
+
+/* Hide the video description's views. */
+#info-container > #info > span:nth-child(1) {
+    display: none !important;
+}
+
+/* Hide the 'separator' between the video description's views and upload date. */
+#info-container > #info > span:nth-child(2) {
+    display: none !important;
+}
+
+/* Hide the vote counts on all comments. */
+#vote-count-middle {
+    display: none !important;
+}
+
+/* Hide the channel subscriber count atop the video description. */
+#owner-sub-count {
+    display: none !important;
+}
+
+/* Hide the channel subscriber count below the video description. */
+#header div#subtitle {
+    display: none;
+}
+
+like-button-view-model > toggle-button-view-model > button-view-model > button > .yt-spec-button-shape-next__button-text-content {
+    display: none !important;
+}
+
+/* [Studio] Hide the subscribers trend. */
+.subscribers-trend {
+    display: none !important;
+}
+
+/* [Studio] Hide the comment analytics bar below the 'Latest post' section. */
+ytcd-post-stats-item {
+    display: none !important;
+}
+
+/* [Studio] Hide the typical performance indicator icons. */
+.typical-perf-icon {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Latest comments' section. */
+ytcd-card[test-id="channel-dashboard-comment-card"] {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Recent activity' section. */
+ytcd-card[test-id="channel-dashboard-recent-activity-card"] {
+    display: none !important;
+}
+
+/*                 // [Studio] Remove the views metric in the 'Channel analytics' section.
+                if (node.matches('.metric-row')) {
+                    if (hasParentMatchingSelector(node, '#metrics-table', 1) && node.previousElementSibling === null) {
+                        node.style.display = 'none';
+                    }
+                } */
+
+/* [Studio] Hide the views metric in the 'Channel analytics' section. */
+#metrics-table .metric-row:first-child {
+    display: none !important;
+}
+
+/* [Studio] Hide the analytics section below the 'Latest video performance'. */
+#analytics-section {
+    display: none !important;
+}

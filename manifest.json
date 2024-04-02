@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Hide YouTube Statistics",
-    "version": "1.0",
+    "version": "2.4",
     "description": "Customize YouTube by removing views, likes, comments, and more.",
     "permissions": [
       "storage"
@@ -9,7 +9,8 @@
     "content_scripts": [
       {
         "matches": ["*://*.youtube.com/*"],
-        "js": ["contentScript.js"]
+        "js": ["contentScript.js"],
+        "css": ["content.css"]
       }
     ],
     "action": {

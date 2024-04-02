@@ -6,88 +6,6 @@ style.textContent = `
     `;
 
 document.head.appendChild(style);
-
-function hideViewCountsBelowThumbnails() {
-    const firstViewCounts = document.querySelectorAll('#metadata-line > .inline-metadata-item');
-    firstViewCounts.forEach(span => {
-        if (span.textContent.includes('views')) {
-            span.style.display = 'none';
-            const nextSpan = span.nextElementSibling;
-            if (nextSpan && !nextSpan.classList.contains('hide-before')) {
-                nextSpan.classList.add('hide-before');
-            }
-        }
-    });
-
-    const secondViewCounts = document.querySelectorAll('#metadata-line > .ytd-grid-video-renderer');
-    secondViewCounts.forEach(span => {
-        if (span.textContent.includes('views')) {
-            span.style.display = 'none';
-            const nextSpan = span.nextElementSibling;
-            if (nextSpan && !nextSpan.classList.contains('hide-before')) {
-                nextSpan.classList.add('hide-before');
-            }
-        }
-    });
-}
-
-function hideCommentCountBelowVideo() {
-    const commentsHeader = document.querySelector('.ytd-comments-header-renderer[id="leading-section"]');
-    if (commentsHeader) {
-        const firstSpan = commentsHeader.querySelector('span');
-        firstSpan.textContent = ' ';
-    }
-}
-
-function hideReplyAmountsInComments() {
-    const moreReplies = document.querySelectorAll('ytd-button-renderer[id="more-replies"]');
-    moreReplies.forEach(element => {
-        const buttonLabel = element.querySelector('.yt-core-attributed-string');
-        if (buttonLabel) {
-            buttonLabel.textContent = 'Show more';
-        }
-    });
-
-    const lessReplies = document.querySelectorAll('ytd-button-renderer[id="less-replies"]');
-    lessReplies.forEach(element => {
-        const buttonLabel = element.querySelector('.yt-core-attributed-string');
-        if (buttonLabel) {
-            buttonLabel.textContent = 'Show less';
-        }
-    });
-}
-
-function hideViewsBelowVideo() {
-    const views = document.getElementById('info-container');
-    if (views) {
-        views.style.display = 'none';
-    }
-}
-
-function hideSubscribersBelowVideo() {
-    const subscribers = document.querySelectorAll('yt-formatted-string#owner-sub-count');
-    subscribers.forEach(span => {
-        span.style.display = 'none';
-    });
-}
-
-function hideSubscribersBelowVideoDescriptionBottomHeader() {
-    const container = document.querySelector('div[id="header-text"]');
-    if (container) {
-        const subscriberLabel = container.querySelector('div[id="subtitle"]');
-        if (subscriberLabel) {
-            subscriberLabel.style.display = 'none';
-        }
-    }
-}
-
-function hideLikeAmountsInComments() {
-    const voteCountMiddles = document.querySelectorAll('span[id="vote-count-middle"]');
-    voteCountMiddles.forEach(voteCountMiddle => {
-        voteCountMiddle.textContent = 'Like';
-    });
-}
-
 function hideShortsLikeAmount(shortsInnerContainer) {
     const likeButtons = shortsInnerContainer.querySelectorAll('ytd-toggle-button-renderer[id="like-button"]');
     likeButtons.forEach(likeButton => {
@@ -117,147 +35,36 @@ function hideShortsCommentsAmountInSidePanel(shortsInnerContainer) {
     });
 }
 
-function hideStudioSeeCommentsAmount() {
-    const viewCommentsButton = document.getElementById('view-comments-button');
-    if (viewCommentsButton) {
-        const viewCommentsButtonLabel = viewCommentsButton.querySelector('div');
-
-        if (viewCommentsButtonLabel) {
-            viewCommentsButtonLabel.textContent = 'See Comments';
-        }
-    }
-}
-
-function hideStudioLatestComments() {
-    const latestComments = document.querySelector("ytcd-card[test-id='channel-dashboard-comment-card']");
-    if (latestComments) {
-        latestComments.style.display = 'none';
-    }
-}
-
-function isVideo() {
-    return window.location.href.includes('youtube.com/watch'); // TODO: Add more checks.
-}
-
 function isShorts() {
     return window.location.href.includes('youtube.com/shorts');
 }
 
-function isStudio() {
-    return window.location.href.includes('studio.youtube.com');
-}
-
-function hideVideoMetricsOfChildren(node) {
-    const videoMetricsElement = node.querySelector('.video-metrics');
-    if (videoMetricsElement) {
-        videoMetricsElement.style.display = 'none';
-    }
-}
-
-function hideVideoMetrics(node) {
-    if (node.matches('.video-metrics')) {
-        node.style.display = 'none';
-    }
-}
-
-function hideAnalyticsCollapsableBar(node) {
-    if ((node.matches('.collapsable-bar') || node.id === "analytics-section") && node.parentElement.id === 'video-snapshot') {
-        node.style.display = 'none';
-    }
-}
-
-function hideAnalyticsViews(node) {
-    if ((node.matches('.metric-row')) && node.parentElement.id === "metrics-table" && node.previousElementSibling === null) {
-        node.style.display = 'none';
-    }
-}
-
-function hideSubscribersTrend(node) {
-    if (node.matches(".subscribers-trend")) {
-        node.style.display = 'none';
-    }
-}
-
-function roundCurrentSubscribersAmount(node) {
-    const metricValues = node.querySelectorAll(".metric-value-big.style-scope.ytcd-channel-facts-item");
-    metricValues.forEach(metricValue => {
-        const subscribersTitle = metricValue.parentElement.querySelector(".subscribers-title.style-scope.ytcd-channel-facts-item");
-        if (subscribersTitle && subscribersTitle.textContent.includes("Current subscribers")) {
-            const subscriberCount = Math.round(parseInt(metricValue.textContent.replace(/,/g, '')) / 100000) * 100000;
-            metricValue.textContent = subscriberCount.toLocaleString();
-        }
-    });
-}
-
-function hideSubscribersTrendOfChildren(node) {
-    if (node.querySelector(".subscribers-trend")) {
-        node.querySelector(".subscribers-trend").style.display = 'none';
-    }
-}
-
-function hideTopVideosViews(node) {
-    const topVideoViewLabels = node.querySelectorAll('a.table-cell.remove-default-style.style-scope.ytcd-channel-facts-item[tabindex="-1"]');
-    topVideoViewLabels.forEach(topVideoViewLabel => {
-        topVideoViewLabel.text = "⠀⠀⠀⠀";
-    });
-}
-
-function hideLatestPostStatistics(node) {
-    if (node.matches('ytcd-post-stats-item')) {
-        node.style.display = 'none';
-    }
-}
-
-function hideLikeAmountsInVideo() {
-    const likeButtonRoot = document.getElementById('top-level-buttons-computed');
-    if (likeButtonRoot) {
-        const likeButton = likeButtonRoot.querySelector('.yt-spec-button-shape-next__button-text-content');
-
-        if (likeButton) {
-            likeButton.remove();
-        }
-    }
-}
-
-function toggleCommentSectionVisibility(hideComments) {
-    const comments = document.querySelectorAll('ytd-comments[id="comments"]');
-    comments.forEach(comment => {
-        comment.style.display = hideComments ? 'none' : 'block';
-    });
-}
-
-function hideEverything() {
-    if (isShorts()) {
-        let shortsInnerContainer = document.getElementById('shorts-inner-container');
-
-        if (shortsInnerContainer) {
-            // Hide the like amount in the Shorts like button, replace it with 'Like'.
-            hideShortsLikeAmount(shortsInnerContainer);
-
-            // Hide the comment amount in the Shorts comment button, replace it with 'Comment'.
-            hideShortsCommentAmount(shortsInnerContainer);
-
-            // Hide the comment amount in the Shorts comment side panel.
-            hideShortsCommentsAmountInSidePanel(shortsInnerContainer);
-        }
-    }
-
-    if (isStudio()) {
-        // Hide the comment amount in the Studio dashboard's 'See Comments (${amount})' button, replace it with 'See Comments'.
-        hideStudioSeeCommentsAmount();
-
-        // Hide the 'Latest comments' section in the Studio dashboard.
-        hideStudioLatestComments();
-    }
-}
-
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Hide everything on page load.
-    // hideEverything();
 });
 
-// checks whether the element has parent with selector X, on the Y last parents
+/**
+ * Returns the subscriber count in a more readable,
+ * less precise format.
+ */
+function formatSubscriberCount(subscriberCount) {
+    if (subscriberCount >= 1000000) { // For millions
+        const millions = subscriberCount / 1000000;
+        const roundedMillions = Math.round(millions * 10) / 10; // Rounds to 1 decimal place
+        return `${roundedMillions}M`;
+    } else if (subscriberCount >= 100000) { // For hundred thousands
+        const hundredThousands = Math.round(subscriberCount / 100000) * 100000;
+        return (hundredThousands / 1000) + 'K';
+    } else if (subscriberCount >= 1000) { // For thousands
+        const thousands = Math.round(subscriberCount / 1000) * 1000;
+        return (thousands / 1000) + 'K';
+    }
+    return subscriberCount.toString(); // For less than 1000, show the exact number
+}
+
+/**
+ * Returns whether an element has a parent matching a selector,
+ * up to a certain depth.
+ */
 function hasParentMatchingSelector(element, selector, depth) {
     let parent = element;
     for (let i = 0; i < depth; i++) {
@@ -273,50 +80,24 @@ function hasParentMatchingSelector(element, selector, depth) {
 
     return false;
 }
-
 const observer = new MutationObserver(mutations => {
+    // TODO: Rewrite to be reactive.
+    if (isShorts()) {
+        let shortsInnerContainer = document.getElementById('shorts-inner-container');
+
+        if (shortsInnerContainer) {
+            // Hide the like amount in the Shorts like button, replace it with 'Like'.
+            hideShortsLikeAmount(shortsInnerContainer);
+
+            // Hide the comment amount in the Shorts comment button, replace it with 'Comment'.
+            hideShortsCommentAmount(shortsInnerContainer);
+
+            // Hide the comment amount in the Shorts comment side panel.
+            hideShortsCommentsAmountInSidePanel(shortsInnerContainer);
+        }
+    }
+
     mutations.forEach(mutation => {
-        let skipUpdatingChannelInfoHeaderViews = false;
-
-        // Remove the view count in the channel information header below the video.
-        if (mutation.target.matches('span[style-target="bold"]')) {
-            if (hasParentMatchingSelector(mutation.target, 'yt-formatted-string#info', 1)) {
-                if (mutation.target.previousSibling == null) {
-                    // The label is contained in a 'span:nth-child(1)' element.
-                    // Starting at the stable parent, the chain goes:
-                    // 'yt-formatted-string#info'
-                    // => 'span:nth-child(1)' & 'span:nth-child(2)'
-
-                    mutation.target.textContent = '';
-
-                    const viewsSeparator = mutation.target.nextSibling;
-                    if (viewsSeparator) {
-                        viewsSeparator.textContent = '';
-                    }
-
-                    // Since we have already removed the view count, we skip updating the channel information header views
-                    // a second time, as that affects the other spans and I am not certain why.
-                    skipUpdatingChannelInfoHeaderViews = true;
-                }
-            }
-        }
-
-        // Remove the view counts in the video thumbnail.
-        if (mutation.target.matches('.inline-metadata-item')) {
-            if (mutation.target.previousSibling && mutation.target.previousSibling.nodeType === Node.ELEMENT_NODE && mutation.target.previousSibling.matches('div#separator')) {
-                // The label is contained in a 'span' element.
-                // The 'separator' precedes this element, and we can more likely than not
-                // guess that, given this is a '.inline-metadata-item' preceded by the separator,
-                // this must be the views label.
-                mutation.target.textContent = '';
-            }
-        }
-
-        // Remove the subscribers count in the channel information header below the video.
-        if (mutation.target.matches("#owner-sub-count")) {
-            mutation.target.textContent = ' ';
-        }
-
         // Remove the comment amounts in the video comment section.
         if (mutation.target.matches("ytd-button-renderer#more-replies")) {
             const buttonLabel = mutation.target.querySelector('.yt-core-attributed-string');
@@ -335,15 +116,60 @@ const observer = new MutationObserver(mutations => {
             }
         }
 
-        // [Studio] Remove the subscribers trend in the 'Channel analytics' section.
-        // This must be done here because the component is updated/added after
-        // its parent is added, therefore we cannot check for 'ytcd-channel-facts-item'.
-        if (mutation.target.matches('.subscribers-trend')) {
-            mutation.target.style.display = 'none';
+        // [Studio] Remove the 'Views' subtitle in the 'Top videos' section.
+        // Annoyingly, this cannot be done reactively. We must check for the title
+        // from a stable parent as I cannot trace where the subtitle is added.
+        const channelDashboardFactsCard = document.querySelector('ytcd-card[test-id="channel-dashboard-facts-card"]');
+
+        // To do that, we locate the nearest stable parent - the card itself - and
+        // then use a query selector to locate the title.
+        if (channelDashboardFactsCard) {
+            const topVideosTitle = [
+                ...channelDashboardFactsCard.querySelectorAll('div.section-title span.section-title-text')
+            ].find(span => span.textContent.trim() === "Top videos");
+
+            if (topVideosTitle) {
+                // Now that we have the title, we can find the subtitle.
+                // As a reminder, the structure looks like this:
+
+                // => Top videos
+                // => Last 48 hours - Views
+
+                // We are trying to remove 'Views'.
+                const topVideosSubtitle = topVideosTitle.nextElementSibling;
+                if (topVideosSubtitle) {
+                    // Now that we have the subtitle, we can find the span for the 'Last 48 hours' 'span'.
+                    const lastHours = topVideosSubtitle.querySelector('span');
+                    if (lastHours) {
+                        // And then, find the 'Views' section, which is raw text.
+                        const views = lastHours.nextSibling;
+                        if (views) {
+                            views.remove();
+                        }
+                    }
+                }
+            }
         }
 
         mutation.addedNodes.forEach(node => {
             if (node.nodeType === Node.ELEMENT_NODE) {
+                if (node.matches('ytd-comments[id="comments"]') || node.matches('ytd-comment-renderer')) {
+                    chrome.storage.sync.get('hideComments', function(data) {
+                        if (data.hideComments !== undefined) {
+                            toggleCommentsVisibility(data.hideComments);
+                        }
+                    });
+                }
+
+                // [Studio] Remove the 'performance' word from the 'Latest video performance'
+                // section.
+                if (node.matches("#video-snapshot")) {
+                    const title = node.querySelector(".title");
+                    if (title) {
+                        title.textContent = title.textContent.replace(" performance", "");
+                    }
+                }
+
                 // [Studio] Remove the analytics bar below the video thumbnail in the
                 // 'Latest video performance' section.
                 if (node.matches("div .collapsable-bar")) {
@@ -358,17 +184,11 @@ const observer = new MutationObserver(mutations => {
                     }
                 }
 
-                // [Studio] Remove the comment analytics bar below the 'Latest post' section.
-                if (node.matches('ytcd-post-stats-item')) {
-                    node.style.display = 'none';
-                }
-
                 // [Studio] Round the subscriber amount in the 'Channel analytics' section,
                 // and the video views in the 'Top videos' subsection.
                 // Also removes the performance metrics icons.
                 if (node.matches('div .ytcd-channel-facts-item')) {
                     const metricValue = node.querySelector(".metric-value-big.style-scope.ytcd-channel-facts-item");
-
                     if (metricValue) {
                         const subscribersTitle = metricValue.parentElement.querySelector(".subscribers-title.style-scope.ytcd-channel-facts-item");
                         if (subscribersTitle && subscribersTitle.textContent.includes("Current subscribers")) {
@@ -381,31 +201,9 @@ const observer = new MutationObserver(mutations => {
                     topVideoViewLabels.forEach(topVideoViewLabel => {
                         topVideoViewLabel.text = "⠀⠀⠀⠀";
                     });
-
-                    const typicalPerformanceIcons = node.querySelectorAll('.typical-perf-icon');
-                    typicalPerformanceIcons.forEach(icon => {
-                        icon.remove();
-                    });
                 }
 
-                // [Studio] Remove the 'Latest comments' section.
-                if (node.matches('ytcd-card[test-id="channel-dashboard-comment-card"]')) {
-                    node.style.display = 'none';
-                }
-
-                // [Studio] Remove the 'Recent activity' section.
-                if (node.matches('ytcd-card[test-id="channel-dashboard-recent-activity-card"]')) {
-                    node.style.display = 'none';
-                }
-
-                // [Studio] Remove the views metric in the 'Channel analytics' section.
-                if (node.matches('.metric-row')) {
-                    if (hasParentMatchingSelector(node, '#metrics-table', 1) && node.previousElementSibling === null) {
-                        node.style.display = 'none';
-                    }
-                }
-
-                // Remove the comment amounts in the video comment section.
+                // [Video] Remove the comment amounts in the video comment section.
                 if (node.matches("ytd-button-renderer#more-replies")) {
                     const buttonLabel = node.querySelector('.yt-core-attributed-string');
 
@@ -414,7 +212,7 @@ const observer = new MutationObserver(mutations => {
                     }
                 }
 
-                // Remove the comment amounts in the video comment section.
+                // [Video] Remove the comment amounts in the video comment section.
                 if (node.matches("ytd-button-renderer#less-replies")) {
                     const buttonLabel = node.querySelector('.yt-core-attributed-string');
 
@@ -423,18 +221,7 @@ const observer = new MutationObserver(mutations => {
                     }
                 }
 
-                // Remove the comment like amount in the video comment section.
-                if (node.matches("ytd-comment-renderer")) {
-                    const voteCountMiddle = node.querySelector('span#vote-count-middle');
-
-                    if (voteCountMiddle) {
-                        // The label is contained in a 'span#vote-count-middle'.
-                        // This is stable, so we do not need to worry about the tree.
-                        voteCountMiddle.textContent = ' ';
-                    }
-                }
-
-                // Remove the comment amount in the video comment section.
+                // [Video] Remove the comment amount in the video comment section.
                 if (node.matches("ytd-comments-header-renderer")) {
                     // We must select the renderer here, because the amount is added after the renderer is added.
                     // It appears to be updated by the renderer and targeting the count directly, when #sections
@@ -470,62 +257,7 @@ const observer = new MutationObserver(mutations => {
                     }
                 }
 
-                // Remove the view counts in the thumbnails of recommended videos.
-                if (node.matches("#metadata")) {
-                    const metadataLine = node.querySelector("#metadata-line");
-
-                    if (metadataLine) {
-                        const views = metadataLine.querySelector("span:nth-child(3)");
-                        const viewsSeparator = metadataLine.querySelector("span:nth-child(4)");
-
-                        // The label is contained in a 'span' element.
-                        // The separator is contained in a 'span' element that follows the label.
-                        // Starting at the stable parent, the chain goes:
-                        // '#metadata'
-                        // => '#metadata-line'
-                        // => 'span:nth-child(3)' & 'span:nth-child(4)'
-
-                        if (views) {
-                            views.textContent = '';
-                        }
-
-                        // The views separator must be hidden using CSS, because after removing the views,
-                        // the '*' separator is left in there and looks weird.
-                        if (viewsSeparator) {
-                            viewsSeparator.classList.add('hide-before');
-                        }
-                    }
-                }
-
-                // Remove the view counts in the thumbnails of channel videos (eg. 'Videos' tab, or main channel page).
-                if (node.matches("ytd-grid-video-renderer")) {
-                    const metadataLine = node.querySelector("#metadata-line");
-
-                    if (metadataLine) {
-                        const views = metadataLine.querySelector("span:nth-child(1)");
-                        const viewsSeparator = metadataLine.querySelector("span:nth-child(2)");
-
-                        // The label is contained in a 'span' element.
-                        // The separator is contained in a 'span' element that follows the label.
-                        // Starting at the stable parent, the chain goes:
-                        // 'ytd-grid-video-renderer'
-
-                        // => '#metadata-line'
-                        // => 'span:nth-child(1)' & 'span:nth-child(2)'
-
-                        if (views) {
-                            views.textContent = '';
-                        }
-
-                        // The views separator must be hidden using CSS, because after removing the views,
-                        // the '*' separator is left in there and looks weird.
-                        if (viewsSeparator) {
-                            viewsSeparator.classList.add('hide-before');
-                        }
-                    }
-                }
-
-                // Remove the subscriber and video counts in the inner channel header of the main channel page.
+                // [Video] Remove the subscriber and video counts in the inner channel header of the main channel page.
                 if (node.matches('#contentContainer')) {
                     const channelHandles = node.querySelectorAll('#channel-handle');
                     const subscriberCount = node.querySelector('#subscriber-count');
@@ -568,122 +300,9 @@ const observer = new MutationObserver(mutations => {
                         }
                     })
                 }
-
-                // Remove the like amount in the like button.
-                if (node.matches('.yt-spec-button-shape-next__button-text-content')) {
-                    if (hasParentMatchingSelector(node, 'like-button-view-model', 4)) {
-                        // The label is contained in a 'yt-spec-button-shape-next__button-text-content' element.
-                        // Starting at the stable parent, the chain goes:
-                        // 'like-button-view-model'
-                        // => 'toggle-button-view-model'
-                        // => 'button-view-model'
-                        // => 'button'
-                        // => 'div':nth-child(2)
-                        node.remove();
-
-                        // We remove the 'div' because updating the 'textContent' is harder and unnecessary.
-                    }
-                }
-
-                // Remove the subscribers count in the channel information header below the video.
-                if (node.matches("#upload-info")) {
-                    const ownerSubCount = node.querySelector("#owner-sub-count");
-                    if (ownerSubCount) {
-                        // The label is contained in a 'yt-formatted-string#owner-sub-count' element.
-                        // Starting at the stable parent (for which this callback is fired), the chain goes:
-                        // 'div#upload-info'
-                        // => 'yt-formatted-string#owner-sub-count'
-                        ownerSubCount.textContent = ' ';
-                    }
-                }
-
-                if (!skipUpdatingChannelInfoHeaderViews) {
-                    // Remove the view count in the channel information header below the video.
-                    if (node.matches("#info-container")) {
-                        const info = node.querySelector("yt-formatted-string#info");
-                        if (info) {
-                            // The label is contained in a 'span:nth-child(1)' element.
-                            // Starting at the stable parent (for which this callback is fired), the chain goes:
-                            // 'div#info-container'
-                            // => 'yt-formatted-string#info'
-                            // => 'span:nth-child(1)' & 'span:nth-child(2)'
-
-                            // We also remove the separator, which is the second 'span'.
-
-                            const views = info.querySelector("span:nth-child(1)");
-                            const viewsSeparator = info.querySelector("span:nth-child(2)");
-
-                            if (views) {
-                                views.textContent = '';
-                            }
-
-                            if (viewsSeparator) {
-                                viewsSeparator.textContent = '';
-                            }
-                        }
-                    }
-                }
-
-                // Remove the subscribers count in the channel information header below the video description.
-                if (node.matches("#header")) {
-                    const subscriberLabel = node.querySelector("div#subtitle");
-                    if (subscriberLabel) {
-                        // The label is contained in a 'div#subtitle' element.
-                        // Starting at the stable parent (for which this callback is fired), the chain goes:
-                        // 'a#header'
-                        // => 'div#header-text'
-                        // => 'div#subtitle'
-                        subscriberLabel.textContent = ' ';
-                    }
-                }
             }
         });
     });
-    // if (isStudio()) {
-    //     mutations.forEach(mutation => {
-    //         if (!mutation.addedNodes) return;
-    //
-    //         mutation.addedNodes.forEach(node => {
-    //             if (node.nodeType === Node.ELEMENT_NODE) {
-    //                 // Hide the video metrics section in the Studio video snapshot
-    //                 // for any children element of this node.
-    //                 hideVideoMetricsOfChildren(node);
-    //
-    //                 // Hide the video metrics section in the Studio video snapshot
-    //                 // for this node itself, if it is a metric.
-    //                 hideVideoMetrics(node);
-    //
-    //                 // Hide the collapsable bar in the Studio video snapshot,
-    //                 // which sits below the thumbnail.
-    //                 hideAnalyticsCollapsableBar(node);
-    //
-    //                 // Hide the views metric in the Studio 'Channel analytics'
-    //                 // section.
-    //                 hideAnalyticsViews(node);
-    //
-    //                 // Hide the latest post statistics in the Studio 'Channel analytics',
-    //                 // under 'Latest post'.
-    //                 hideLatestPostStatistics(node);
-    //
-    //                 // Hide the top videos views in the Studio 'Channel analytics',
-    //                 // under 'Top videos', for any children element of this node.
-    //                 hideTopVideosViews(node);
-    //
-    //                 // Hide the subscribers trend in the Studio 'Channel analytics',
-    //                 // under 'Subscribers trend' for any children element of this node.
-    //                 hideSubscribersTrendOfChildren(node);
-    //
-    //                 // Hide the subscribers trend in the Studio 'Channel analytics',
-    //                 // under 'Current subscribers' for this node itself if it is the trend.
-    //                 hideSubscribersTrend(node);
-    //
-    //                 // Round the current subscribers amount in the Studio 'Channel analytics',
-    //                 // under 'Current subscribers'.
-    //                 roundCurrentSubscribersAmount(node);
-    //             }
-    //         });
-    //     });
-    // }
 });
 
 observer.observe(document.body, {
@@ -693,31 +312,15 @@ observer.observe(document.body, {
     attributeOldValue: true,
 });
 
-// Hide the comment section based on the stored preference.
-chrome.storage.sync.get('hideComments', function(data) {
-    if (data.hideComments !== undefined) {
-        toggleCommentSectionVisibility(data.hideComments); // Apply the stored preference
-    }
-});
+function toggleCommentsVisibility(hideComments) {
+    const comments = document.querySelectorAll('ytd-comments[id="comments"]');
+    comments.forEach(comment => {
+        comment.style.display = hideComments ? 'none' : 'block';
+    });
+}
 
-// When the comment section visibility preference is changed, update the comment section visibility in real time.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.hideComments !== undefined) {
-        toggleCommentSectionVisibility(request.hideComments);
+        toggleCommentsVisibility(request.hideComments); // This function toggles visibility based on message
     }
 });
-
-function formatSubscriberCount(subscriberCount) {
-    if (subscriberCount >= 1000000) { // For millions
-        const millions = subscriberCount / 1000000;
-        const roundedMillions = Math.round(millions * 10) / 10; // Rounds to 1 decimal place
-        return `${roundedMillions}M`;
-    } else if (subscriberCount >= 100000) { // For hundred thousands
-        const hundredThousands = Math.round(subscriberCount / 100000) * 100000;
-        return (hundredThousands / 1000) + 'K';
-    } else if (subscriberCount >= 1000) { // For thousands
-        const thousands = Math.round(subscriberCount / 1000) * 1000;
-        return (thousands / 1000) + 'K';
-    }
-    return subscriberCount.toString(); // For less than 1000, show the exact number
-}
