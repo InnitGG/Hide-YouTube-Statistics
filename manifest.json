@@ -4,7 +4,6 @@
     "version": "1.0",
     "description": "Customize YouTube by removing views, likes, comments, and more.",
     "permissions": [
-      "activeTab",
       "storage"
     ],
     "content_scripts": [
