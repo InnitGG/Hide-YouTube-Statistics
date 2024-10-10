@@ -135,3 +135,7 @@ div[id="comments-button"] .yt-spec-button-shape-with-label__label {
 yt-formatted-string[id="contextual-info"] {
     display: none !important;
 }
+
+ytcp-button[id="view-comments-button"] {
+    display: none !important;
+}
