@@ -137,6 +137,34 @@ const observer = new MutationObserver(mutations => {
                     }
                 }
 
+                // [Studio] Remove the reply amount in the 'Comments' section.
+                if (node.matches("ytcp-comment-toggle-button#show-replies-button")) {
+                    const text = node.querySelector("yt-formatted-string#text");
+
+                    if (text) {
+                        text.textContent = "Replies";
+                    }
+                }
+
+                // [Studio] Remove the views amount in the 'Comments' section 'Mentions' section.
+                if (node.matches("ytcp-mention-entry")) {
+                    const contextMetadata = node.querySelector("div#context-metadata");
+
+                    if (contextMetadata) {
+                        const nodes = Array.from(contextMetadata.childNodes);
+
+                        if (nodes.length > 3) {
+                            if (nodes[2].nodeType == Node.ELEMENT_NODE) {
+                                nodes[2].style.display = 'none';
+                            }
+
+                            if (nodes[3].nodeType == Node.TEXT_NODE) {
+                                nodes[3].textContent = '';
+                            }
+                        }
+                    }
+                }
+
                 // [Studio] Round the subscriber amount in the 'Channel analytics' section,
                 // and the video views in the 'Top videos' subsection.
                 // Also removes the performance metrics icons.
