@@ -96,6 +96,117 @@ ytcd-card[test-id="channel-dashboard-recent-activity-card"] {
     height: 0;
 }
 
+/* [Studio] Hide the 'Views' column value in the 'Content' sections. */
+ytcp-video-row > div#row-container > .tablecell-views {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Comments' column value in the 'Content' sections. */
+ytcp-video-row > div#row-container > .tablecell-comments {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Likes (vs. dislikes)' column value in the 'Content' sections. */
+ytcp-video-row > div#row-container > .tablecell-likes {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Live viewers' column value in the 'Content' sections. */
+ytcp-video-row > div#row-container > .tablecell-live-viewers {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Comments' column value in the 'Content#Posts' section. */
+ytcp-post-row > div#row-container > .tablecell-comments {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Likes' column value in the 'Content#Posts' section. */
+ytcp-post-row > div#row-container > .tablecell-likes {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Responses' column value in the 'Content#Posts' section. */
+/* Yes, it is actually named 'Votes'. */
+ytcp-post-row > div#row-container > .tablecell-votes {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Views' column header in the 'Content' sections. */
+div.tablecell-views {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Comments' column header in the 'Content' sections. */
+div.tablecell-comments {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Likes (vs. dislikes)' column header in the 'Content' sections. */
+div.tablecell-likes {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Live viewers' column header in the 'Content#Live' section. */
+div.tablecell-live-viewers {
+    display: none !important;
+}
+
+/* [Studio] Hide the 'Responses' column header in the 'Content#Posts' section. */
+/* Yes, it is actually named 'Votes'. */
+div.tablecell-votes {
+    display: none !important;
+}
+
+/* [Studio] Limit the width of the 'Save Draft' column in the 'Content#Videos' section.
+This is done to align the elements on the left with the columns, as this element
+is often wider than the other columns and has no column itself in this arrangement, and
+its width is 88px by default. */
+div#row-container > div:last-child:not([class^="tablecell-"]):has(.edit-draft-button) {
+    max-width: 88px !important;
+    width: 88px !important;
+}
+
+/* [Studio] Remove the minimum width of the 'Save Draft' column in the 'Content#Videos' section.
+This is done to align the elements on the left with the columns, as this element
+is often wider than the other columns and has no column itself in this arrangement, and
+its min-width is 100px by default. */
+div#row-container > div:last-child:not([class^="tablecell-"]):has(.edit-draft-button)[style] {
+    min-width: 0 !important;
+}
+
+/* [Studio] Hide the date column if it is empty, such as in the case of a draft, as to align
+the 'Save Draft' column with the other columns. Check for 'h3' too to avoid hiding the date
+in other sections. */
+div.tablecell-date:not(:has(div, h3)) {
+    display: none !important;
+}
+
+/* [Studio] Hide the vote count in the 'Comments' section. */
+ytcp-comment-action-buttons > div#toolbar > yt-formatted-string#vote-count {
+    display: none !important;
+}
+
+/* [Studio] Hide the subscriber count in the 'Comments' section 'Mentions' section. */
+ytcp-mention-entry > div#mention-entry > div#column-count > div#subscriber-count {
+    display: none !important;
+}
+
+/*!* [Studio] Hide the 'Latest video' section. *!*/
+/*div#video-snapshot {*/
+/*    display: none !important;*/
+/*}*/
+
+/* [Studio] Hide the video metrics in 'Published videos'. */
+ytcd-recent-videos-item div.video-metrics {
+    display: none !important;
+}
+
+/* [YouTube] Hide the subscribers in the account switcher. */
+ytd-account-item-renderer tp-yt-paper-item-body > yt-formatted-string:nth-child(3) {
+    display: none !important;
+}
+
 /* [Channel] Hide the subscriber and video counts in the inner channel header of the main channel pages. */
 #contentContainer #subscriber-count, #contentContainer #videos-count {
     display: none !important;
