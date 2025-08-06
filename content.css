@@ -243,18 +243,14 @@ span#dot.style-scope.ytd-channel-renderer {
     display: none !important;
 }
 
-/* [Shorts] Hide the like amount in the like button */
-ytd-toggle-button-renderer[id="like-button"] .yt-spec-button-shape-with-label__label {
+
+/* [Shorts] Hide actions labels in the reel action bar */
+reel-action-bar-view-model div.yt-spec-button-shape-with-label__label {
     display: none !important;
 }
 
-/* [Shorts] Hide the dislike amount in the like button */
-ytd-toggle-button-renderer[id="dislike-button"] .yt-spec-button-shape-with-label__label {
-    display: none !important;
-}
-
-/* [Shorts] Hide the comment amount */
-div[id="comments-button"] .yt-spec-button-shape-with-label__label {
+/* [Shorts] Hide the views amount hidden modal */
+div.shortsLockupViewModelHostMetadataSubhead > span {
     display: none !important;
 }
 
