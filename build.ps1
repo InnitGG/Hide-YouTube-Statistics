@@ -1,4 +1,4 @@
-$version = "3.0"
+$version = "3.1"
 $sourceFolder = "."
 $releaseFolder = "releases"
 $zipFile = "$releaseFolder/hide-youtube-statistics-$version.zip"
