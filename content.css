@@ -13,6 +13,16 @@
     display: none !important;
 }
 
+/* [Video] Hide the view count on the sidebar of the video page. */
+yt-content-metadata-view-model > div:nth-child(2) > span:not(:nth-child(3)) {
+    display: none !important;
+}
+
+/* [Video] Hide the view count of the shorts on the sidebar of the video page. */
+ytm-shorts-lockup-view-model > div > div:first-child > div {
+    display: none !important;
+}
+
 /* [Video] Hide the video description's views. */
 #info-container > #info > span:nth-child(1) {
     display: none !important;
@@ -212,6 +222,12 @@ ytd-account-item-renderer tp-yt-paper-item-body > yt-formatted-string:nth-child(
     display: none !important;
 }
 
+/* [Channel] Hide the video count and dot separator in the search page. */
+span#video-count.style-scope.ytd-channel-renderer,
+span#dot.style-scope.ytd-channel-renderer {
+    display: none !important;
+}
+
 /* [Channel] Remove the space after the channel handle in the main channel pages. */
 #contentContainer #subscriber-count + *, #contentContainer #channel-handle + * {
     display: none !important;
@@ -248,5 +264,30 @@ yt-formatted-string[id="contextual-info"] {
 }
 
 ytcp-button[id="view-comments-button"] {
+    display: none !important;
+}
+
+/* [Channel] Hide subscriber count, delimiter, and video count in channel page. */
+yt-content-metadata-view-model.page-header-view-model-wiz__page-header-content-metadata > *:not(:first-child) {
+    display: none !important;
+}
+
+/* [Channel] Hide other channels subscriber count in channel page. */
+span#thumbnail-attribution.style-scope.ytd-grid-channel-renderer {
+    display: none !important;
+}
+
+/* [Channel] Hide the comment count in the comment section. */
+#reply-button-end > ytd-button-renderer > yt-button-shape > a > div:nth-child(2).yt-spec-button-shape-next__button-text-content > span.yt-core-attributed-string.yt-core-attributed-string--white-space-no-wrap[role="text"] {
+    display: none !important;
+}
+
+/* [Liked videos] Hide the video count in the video info section. */
+yt-formatted-string#video-info > span:not(:last-child) {
+    display: none !important;
+}
+
+/* [Studio] Hide the video count in the summary section. */
+#metrics-table > div.metric-row.style-scope.ytcd-channel-facts-item {
     display: none !important;
 }

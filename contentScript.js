@@ -237,6 +237,16 @@ const observer = new MutationObserver(mutations => {
                         }
                     }
                 }
+
+                // [Video] Hide the view count at the endscreens.
+                if (node.querySelectorAll(".ytp-videowall-still-info-author")) {
+                    const authorElements = node.querySelectorAll(".ytp-videowall-still-info-author");
+                    authorElements.forEach(authorElement => {
+                        const text = authorElement.textContent;
+                        const authorName = text.split('•')[0].trim();
+                        authorElement.textContent = authorName;
+                    });
+                }
             }
         });
     });
